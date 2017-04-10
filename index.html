@@ -30,9 +30,9 @@
     <a href="http://threejs.org" target="_blank"></a>四维科技 - TOLL test
 </div>
 
-<script src="libs/three.js"></script>
-<script src="libs/controls/OrbitControls.js"></script>
-<script src="libs/loaders/OBJLoader.js"></script>
+<script src="res/js/lib/three.js"></script>
+<script src="res/js/lib/controls/OrbitControls.js"></script>
+<script src="res/js/lib/loaders/OBJLoader.js"></script>
 
 <script>
     var container;
@@ -70,14 +70,14 @@
         var onError = function ( xhr ) {
         };
         var loader = new THREE.ImageLoader( manager );
-        loader.load( 'textures/UV_Grid_Sm.jpg', function ( image ) {
+        loader.load( 'res/textures/UV_Grid_Sm.jpg', function ( image ) {
             texture.image = image;
             texture.needsUpdate = true;
         } );
         // model
         var loader = new THREE.OBJLoader( manager );
 
-        loader.load( 'models/toll.obj', function ( object ) {
+        loader.load( 'res/models/toll.obj', function ( object ) {
             console.log("asdfasdf"+":"+object.children.length);
           for(var i= 0;i<=object.children.length;i++){
               object.children[0].material.map = texture;
