@@ -76,14 +76,7 @@
         } );
         // model
         var loader = new THREE.OBJLoader( manager );
-//        loader.load( 'toll.obj', function ( object ) {
-//            object.traverse( function ( child ) {
-//                if ( child instanceof THREE.Mesh ) {
-//                    child.material.map = texture;
-//                }
-//                scene.add( child );
-//            } );
-//        }, onProgress, onError );
+
         loader.load( 'models/toll.obj', function ( object ) {
             console.log("asdfasdf"+":"+object.children.length);
           for(var i= 0;i<=object.children.length;i++){
