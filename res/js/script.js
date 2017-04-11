@@ -32,11 +32,16 @@ function start() {
     var light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(1, 0, 1);
     scene.add(light);
+    //load manager
+    var manager = new THREE.LoadingManager();
+    manager.onProgress = function (item, loaded, total) {
+        console.log(item, loaded, total);
+    };
 
     //ar layoutDesigner = new LayoutDesigner(scene);
 
     function initLayout() {
-        var gate = new TollGate();
+        var gate = new TollGate(manager,scene);
         //layoutDesigner.addTollGate(gate);
         scene.add(gate);
     }
