@@ -12,6 +12,7 @@
             margin: 0px;
             overflow: hidden;
         }
+
         #info {
             color: #fff;
             position: absolute;
@@ -19,9 +20,15 @@
             width: 100%;
             text-align: center;
             z-index: 100;
-            display:block;
+            display: block;
         }
-        #info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+
+        #info a, .button {
+            color: #f00;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer
+        }
     </style>
 </head>
 
@@ -36,7 +43,7 @@
 
 <script>
     var container;
-    var camera, scene, renderer, raycaster ;
+    var camera, scene, renderer, raycaster;
     var mouse = new THREE.Vector2(), INTERSECTED;
     var windowHalfX = window.innerWidth / 2;
     var windowHalfY = window.innerHeight / 2;
@@ -44,70 +51,70 @@
     init();
     animate();
     function init() {
-        container = document.createElement( 'div' );
-        document.body.appendChild( container );
-        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 2000 );
+        container = document.createElement('div');
+        document.body.appendChild(container);
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
         camera.position.z = 15;
         // scene
         scene = new THREE.Scene();
-        var ambient = new THREE.AmbientLight( 0x666666 ,0.5);
-        scene.add( ambient );
-        var light = new THREE.DirectionalLight( 0xffffff, 1 );
-        light.position.set( 1, 0, 1 );
-        scene.add( light );
+        var ambient = new THREE.AmbientLight(0x666666, 0.5);
+        scene.add(ambient);
+        var light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(1, 0, 1);
+        scene.add(light);
         // texture
         var manager = new THREE.LoadingManager();
-        manager.onProgress = function ( item, loaded, total ) {
-            console.log( item, loaded, total );
+        manager.onProgress = function (item, loaded, total) {
+            console.log(item, loaded, total);
         };
         var texture = new THREE.Texture();
-        var onProgress = function ( xhr ) {
-            if ( xhr.lengthComputable ) {
+        var onProgress = function (xhr) {
+            if (xhr.lengthComputable) {
                 var percentComplete = xhr.loaded / xhr.total * 100;
-                console.log( Math.round(percentComplete, 2) + '% downloaded' );
+                console.log(Math.round(percentComplete, 2) + '% downloaded');
             }
         };
-        var onError = function ( xhr ) {
+        var onError = function (xhr) {
         };
-        var loader = new THREE.ImageLoader( manager );
-        loader.load( 'res/textures/UV_Grid_Sm.jpg', function ( image ) {
+        var loader = new THREE.ImageLoader(manager);
+        loader.load('res/textures/UV_Grid_Sm.jpg', function (image) {
             texture.image = image;
             texture.needsUpdate = true;
-        } );
+        });
         // model
-        var loader = new THREE.OBJLoader( manager );
+        var loader = new THREE.OBJLoader(manager);
 
-        loader.load( 'res/models/toll.obj', function ( object ) {
-            console.log("asdfasdf"+":"+object.children.length);
-          for(var i= 0;i<=object.children.length;i++){
-              object.children[0].material.map = texture;
-              scene.add(object.children[0]);
+        loader.load('res/models/toll.obj', function (object) {
+            console.log("asdfasdf" + ":" + object.children.length);
+            for (var i = 0; i <= object.children.length; i++) {
+                object.children[0].material.map = texture;
+                scene.add(object.children[0]);
             }
-        }, onProgress, onError );
+        }, onProgress, onError);
         //cube
-        var geometry = new THREE.BoxBufferGeometry( 0.5, 0.5, 0.5 );
-        for (var i=0; i<5; i++){
-            object = new THREE.Mesh(geometry , new THREE.MeshLambertMaterial( { map:texture,side: THREE.DoubleSide } ) );
-            object.position.set( -7+i*3.5, 3, 5 );
-            scene.add( object );
+        var geometry = new THREE.BoxBufferGeometry(0.5, 0.5, 0.5);
+        for (var i = 0; i < 5; i++) {
+            object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({map: texture, side: THREE.DoubleSide}));
+            object.position.set(-7 + i * 3.5, 3, 5);
+            scene.add(object);
         }
 
 
         //
-        raycaster = new THREE.Raycaster();
+
 
         renderer = new THREE.WebGLRenderer();
-        renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        renderer.setClearColor( 0x000000 );
-        container.appendChild( renderer.domElement );
-       // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000);
+        container.appendChild(renderer.domElement);
+        // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
         //
-        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-        window.addEventListener( 'resize', onWindowResize, false );
+        document.addEventListener('mousemove', onDocumentMouseMove, false);
+        window.addEventListener('resize', onWindowResize, false);
 
         // controls
-        var controls = new THREE.OrbitControls( camera, renderer.domElement );
+        var controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls.maxPolarAngle = Math.PI * 0.5;
         controls.minDistance = 10;
         controls.maxDistance = 7500;
@@ -117,9 +124,9 @@
         windowHalfY = window.innerHeight / 2;
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize(window.innerWidth, window.innerHeight);
     }
-    function onDocumentMouseMove( event ) {
+    function onDocumentMouseMove(event) {
 
         event.preventDefault();
 
@@ -127,38 +134,38 @@
         mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
     }
     function animate() {
-        requestAnimationFrame( animate );
+        requestAnimationFrame(animate);
         render();
     }
     function render() {
         // find intersections
 
-        raycaster.setFromCamera( mouse, camera );
+        raycaster.setFromCamera(mouse, camera);
 
-        var intersects = raycaster.intersectObjects( scene.children );
+        var intersects = raycaster.intersectObjects(scene.children);
 //        console.log("intersects"+" "+intersects.length);
 //        console.log("    "+" ");
-        if ( intersects.length > 0 ) {
+        if (intersects.length > 0) {
 
-            if ( INTERSECTED != intersects[ 0 ].object ) {
+            if (INTERSECTED != intersects[0].object) {
 
-                if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+                if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 
-                INTERSECTED = intersects[ 0 ].object;
+                INTERSECTED = intersects[0].object;
                 INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-                INTERSECTED.material.emissive.setHex( 0xff0000 );
+                INTERSECTED.material.emissive.setHex(0xff0000);
 
             }
 
         }
         else {
 
-            if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+            if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 
             INTERSECTED = null;
 
         }
-        renderer.render( scene, camera );
+        renderer.render(scene, camera);
     }
 </script>
 
