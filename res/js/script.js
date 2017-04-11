@@ -5,11 +5,13 @@
 
 function start() {
 
+    var tollgates = [];
+    var cctvs = [];
+
     var scene = new THREE.Scene();
     var renderer = new THREE.WebGLRenderer();
-    // var width = 800;
-    // var height = 600;
     renderer.setPixelRatio(window.devicePixelRatio);
+    console.log(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0xaaaaaa);
     document.body.appendChild(renderer.domElement);
@@ -20,58 +22,33 @@ function start() {
     camera.position.y = 0;
     camera.position.z = 15;
     // camera.up = new THREE.Vector3(0, 0, 1);
-
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.maxPolarAngle = Math.PI * 0.5;
     controls.minDistance = 10;
     controls.maxDistance = 7500;
+    //light
+    var ambient = new THREE.AmbientLight(0x666666, 0.5);
+    scene.add(ambient);
+    var light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(1, 0, 1);
+    scene.add(light);
 
-    this.render = function () {
+    //ar layoutDesigner = new LayoutDesigner(scene);
+
+    function initLayout() {
+        var gate = new TollGate();
+        //layoutDesigner.addTollGate(gate);
+        scene.add(gate);
+    }
+
+    function render() {
 
         requestAnimationFrame(render);
         renderer.render(scene, camera);
 
     };
-    // // Initialize workspace designer
-    // var workspaceDesigner = new WorkspaceDesigner(scene, renderer);
-    //
-    // function initRRCrane() {
-    //
-    //     workspaceDesigner.addLink(new Kinematic.Link(0, 0, 2));
-    //
-    //     var j1 = new Kinematic.Link(0, 0, 3);
-    //     workspaceDesigner.addLink(j1);
-    //
-    //     var j2 = new Kinematic.Link(0, 7, 0);
-    //     j2.rotate(0, Math.PI / 2, 0);
-    //     workspaceDesigner.addLink(j2);
-    //
-    //     var j3 = new Kinematic.Link(0, 3, 0);
-    //     j3.rotate(0, 0, Math.PI);
-    //     workspaceDesigner.addLink(j3);
-    //
-    //     workspaceDesigner.addLimit(
-    //         new Crane.RotationLimit(j1, new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 2*Math.PI))
-    //     );
-    //
-    //     workspaceDesigner.addLimit(
-    //         new Crane.RotationLimit(j2, new THREE.Vector3(0.1, 0, 0), new THREE.Vector3(1, 0, 0))
-    //     );
-    //
-    //     workspaceDesigner.addLimit(
-    //         new Crane.RotationLimit(j3, new THREE.Vector3(0, 0, 0.4), new THREE.Vector3(0, 0, 1.5))
-    //     );
-    //
-    //     workspaceDesigner.updateLinksMesh();
-    //     workspaceDesigner.updateLimitMeshes();
-    //     workspaceDesigner.updateWorkspaceMesh();
-    //
-    // }
-    //
-    // initRRCrane();
 
+    initLayout();
     render();
-
 }
-
 window.onload = start;
