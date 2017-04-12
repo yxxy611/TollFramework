@@ -12,7 +12,7 @@ function start() {
     var scene = new THREE.Scene();
     var renderer = new THREE.WebGLRenderer();
     var mouse = new THREE.Vector2(), INTERSECTED;
-    var raycaster = new THREE.Raycaster();;
+    var raycaster = new THREE.Raycaster();
 
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -40,47 +40,48 @@ function start() {
     manager.onProgress = function (item, loaded, total) {
         console.log(item, loaded, total);
     };
-    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-    window.addEventListener( 'resize', onWindowResize, false );
+    document.addEventListener('mousemove', onDocumentMouseMove, false);
+    document.addEventListener('click', onDocumentClick, false);
+    window.addEventListener('resize', onWindowResize, false);
 
     //ar layoutDesigner = new LayoutDesigner(scene);
 
     function initLayout() {
         //var gate = new ObjComponent();
-        var gate1 = new TollGate(scene,manager);
-        gate1.setPos(0,0,0);
-        gate1.updateMesh();
+        var gate1 = new TollGate(scene, manager);
+        gate1.setPos(0, 0, 0);
+        gate1.createMesh();
         //layoutDesigner.addTollGate(gate);
 
 
     }
+
     function animate() {
-        requestAnimationFrame( animate );
+        requestAnimationFrame(animate);
         render();
     }
+
     function render() {
         // find intersections
-        raycaster.setFromCamera( mouse, camera );
+        raycaster.setFromCamera(mouse, camera);
 
-        var intersects = raycaster.intersectObjects( scene.children );
-//        console.log("intersects"+" "+intersects.length);
-//        console.log("    "+" ");
-        if ( intersects.length > 0 ) {
+        var intersects = raycaster.intersectObjects(scene.children);
+        if (intersects.length > 0) {
 
-            if ( INTERSECTED != intersects[ 0 ].object ) {
+            if (INTERSECTED != intersects[0].object) {
 
-                if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+                if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 
-                INTERSECTED = intersects[ 0 ].object;
+                INTERSECTED = intersects[0].object;
                 INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-                INTERSECTED.material.emissive.setHex( 0xff0000 );
+                INTERSECTED.material.emissive.setHex(0xff0000);
 
             }
 
         }
         else {
 
-            if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+            if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 
             INTERSECTED = null;
 
@@ -94,15 +95,28 @@ function start() {
         windowHalfY = window.innerHeight / 2;
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize(window.innerWidth, window.innerHeight);
     }
-    function onDocumentMouseMove( event ) {
+
+    function onDocumentMouseMove(event) {
 
         event.preventDefault();
 
         mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
         mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
     }
+
+    function onDocumentClick(event) {
+        event.preventDefault();
+        raycaster.setFromCamera(mouse, camera);
+
+        var intersects = raycaster.intersectObjects(scene.children);
+        if (intersects.length > 0) {
+            alert(INTERSECTED.name);
+           // window.open("http://localhost:63342/TollFramework/index.html");
+        }
+    }
+
 
     initLayout();
     animate();
