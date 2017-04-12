@@ -49,6 +49,7 @@ function start() {
     function initLayout() {
         //var gate = new ObjComponent();
         var gate1 = new TollGate(scene, manager);
+        gate1.setPickAble(true);
         gate1.setPos(0, 0, 0);
         gate1.createMesh();
         //layoutDesigner.addTollGate(gate);
@@ -65,15 +66,15 @@ function start() {
         // find intersections
         raycaster.setFromCamera(mouse, camera);
 
-        var intersects = raycaster.intersectObjects(scene.children);
+        var intersects = raycaster.intersectObjects(scene.children,true);
         if (intersects.length > 0) {
 
             if (INTERSECTED != intersects[0].object) {
 
-                if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+                if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);//
 
                 INTERSECTED = intersects[0].object;
-                INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+                INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();//始终保持current为初始值
                 INTERSECTED.material.emissive.setHex(0xff0000);
 
             }
@@ -110,10 +111,11 @@ function start() {
         event.preventDefault();
         raycaster.setFromCamera(mouse, camera);
 
-        var intersects = raycaster.intersectObjects(scene.children);
+        var intersects = raycaster.intersectObjects(scene.children,true);
+
         if (intersects.length > 0) {
             alert(INTERSECTED.name);
-           // window.open("http://localhost:63342/TollFramework/index.html");
+            // window.open("http://localhost:63342/TollFramework/index.html");
         }
     }
 
