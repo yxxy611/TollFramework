@@ -58,7 +58,7 @@ TollGate = function (scene, manager) {
     this.getPart = function () {
         return gate;
     }
-    this.updateMesh = function () {
+    this.createMesh = function () {
         imageloader.load('res/textures/UV_Grid_Sm.jpg', function (image) {
             texture.image = image;
             texture.needsUpdate = true;
@@ -81,6 +81,7 @@ TollGate = function (scene, manager) {
     }
     this.setPickAble = function (boolean) {
 //TODO: implement pick-able SWITCH
+
     }
 };
 // TollGate = function (scene, manager) {
