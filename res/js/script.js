@@ -41,7 +41,7 @@ function start() {
         console.log(item, loaded, total);
     };
     document.addEventListener('mousemove', onDocumentMouseMove, false);
-    document.addEventListener('click', onDocumentClick, false);
+    document.addEventListener('dblclick', onDocumentClick, false);
     window.addEventListener('resize', onWindowResize, false);
 
     //ar layoutDesigner = new LayoutDesigner(scene);
@@ -114,6 +114,7 @@ function start() {
         var intersects = raycaster.intersectObjects(scene.children,true);
 
         if (intersects.length > 0) {
+
             alert(INTERSECTED.name);
             // window.open("http://localhost:63342/TollFramework/index.html");
         }
