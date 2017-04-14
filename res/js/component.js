@@ -41,24 +41,22 @@ PrimitiveComponent = function () {
 //TODO:class for primitives
 }
 //hardcoded class
-TollGate = function (scene, manager) {
-    this.interactive = false;
-    var gate;
-    var position = new THREE.Vector3(0,0,0);
-    var imageloader = new THREE.ImageLoader(manager);
-    var objloader = new THREE.OBJLoader(manager);
+TollGate = function (container) {
+
+    THREE.Object3D.call(this);
+
+    var gate = this;
+    var position = new THREE.Vector3(0, 0, 0);
+    var scene = container[0];
+    var imageloader = container[1];
+    var objloader = container[2];
+    var clickobj = container[3];
     var texture = new THREE.Texture();
-    var onProgress = function (xhr) {
-        if (xhr.lengthComputable) {
-            var percentComplete = xhr.loaded / xhr.total * 100;
-            console.log(Math.round(percentComplete, 2) + '% downloaded');
-        }
-    };
-    var onError = function (xhr) {
-    };
-    this.getPart = function () {
-        return gate;
-    }
+    var group = new THREE.Group()
+
+    this.name = 'Toll Gate'
+    var interactive = false;
+
     this.createMesh = function () {
         imageloader.load('res/textures/UV_Grid_Sm.jpg', function (image) {
             texture.image = image;
@@ -67,48 +65,39 @@ TollGate = function (scene, manager) {
         objloader.load('res/models/toll.obj', function (o) {
             for (var i = 0, l = o.children.length; i < l; i++) {
                 o.children[0].material.map = texture;
-                o.children[0].position.x = position.x;
-                o.children[0].position.y = position.y;
-                o.children[0].position.z = position.z;
-                //scene.add(o.children[i]);
-                scene.add(o.children[0])
+                gate.add(o.children[0]);
             }
             ;
+            gate.position.x = position.x;
+            gate.position.y = position.y;
+            gate.position.z = position.z;
+
+            if(interactive){
+                clickobj.push(gate);
+            }
+            scene.add(gate);
         }, onProgress, onError);
-    }
+    };
     this.setPos = function (a, b, c) {
-        console.log("我是一个大傻逼");
+        console.log(this.name + ':' + 'set pos' + '(' + a + ',' + b + ',' + c + ')');
         position.x = a;
         position.y = b;
         position.z = c;
-    }
+    };
     this.setPickAble = function (boolean) {
 //TODO: implement pick-able SWITCH
-        this.interactive = boolean;
-
+        interactive = boolean;
     }
 };
-// TollGate = function (scene, manager) {
-//     //var gate = new ObjComponent(manager, 'res/textures/UV_Grid_Sm.jpg', 'res/models/toll.obj').getGroup();
-//     var gate;
-//     gate = new ObjComponent(scene, manager, 'res/textures/UV_Grid_Sm.jpg', 'res/models/toll.obj').getGroup();
-//     console.log("group children length" + ":" + gate.children.length)
-//     this.getPart = function () {
-//         return gate;
-//     }
-//     this.setPos = function (a, b, c) {
-//         console.log("我是一个大傻逼");
-//         gate.position.x = a;
-//         gate.position.y = b;
-//         gate.position.z = c;
-//     }
-// };
-TestDummy = function () {
-    var age;
-    this.setAge = function (a) {
-        age = a;
+TollGate.prototype = Object.create(THREE.Object3D.prototype);
+
+/////////////////////////////////////////////////////////////
+
+onProgress = function (xhr) {
+    if (xhr.lengthComputable) {
+        var percentComplete = xhr.loaded / xhr.total * 100;
+        console.log(Math.round(percentComplete, 2) + '% downloaded');
     }
-    this.getAge = function () {
-        alert(age);
-    }
-}
+};
+onError = function (xhr) {
+};
