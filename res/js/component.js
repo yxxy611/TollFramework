@@ -66,12 +66,14 @@ TollGate = function (scene, manager) {
         });
         objloader.load('res/models/toll.obj', function (o) {
             for (var i = 0, l = o.children.length; i < l; i++) {
-                o.children[i].material.map = texture;
-                o.children[i].position.x = position.x;
-                o.children[i].position.y = position.y;
-                o.children[i].position.z = position.z;
+                o.children[0].material.map = texture;
+                o.children[0].position.x = position.x;
+                o.children[0].position.y = position.y;
+                o.children[0].position.z = position.z;
+                //scene.add(o.children[i]);
+                scene.add(o.children[0])
             }
-            scene.add(o);
+            ;
         }, onProgress, onError);
     }
     this.setPos = function (a, b, c) {
