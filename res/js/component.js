@@ -1,5 +1,5 @@
 /**
- * @param {Array} container
+ * @param {SceneContainer} container
  * @constructor
  */
 TollGate = function (container) {
