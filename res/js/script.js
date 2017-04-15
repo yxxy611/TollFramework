@@ -5,7 +5,7 @@
 
 function start() {
 
-    var container = [];
+    var container;
     var clickobj = [];
     var scene = new THREE.Scene();
     var renderer = new THREE.WebGLRenderer();
@@ -45,7 +45,7 @@ function start() {
     var imageloader = new THREE.ImageLoader(manager);
     var objloader = new THREE.OBJLoader(manager);
 
-    container.push(scene,imageloader,objloader,clickobj);
+    container = new SceneContainer(scene, imageloader, objloader, clickobj);
 
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     document.addEventListener('dblclick', onDocumentClick, false);
@@ -58,10 +58,10 @@ function start() {
         gate1.setPickAble(true);
         gate1.setPos(10, 0, 0);
         gate1.createMesh();
-        gate1.name = 'Toll Gate 1'
+        gate1.name = 'Toll Gate 1';
         var gate2 = new TollGate(container);
         gate2.createMesh();
-        gate2.setPos(-10,0,0)
+        gate2.setPos(-10, 0, 0);
         gate2.name = 'Toll Gate 2'
 
 
@@ -76,7 +76,7 @@ function start() {
         // find intersections
         raycaster.setFromCamera(mouse, camera);
 
-        var intersects = raycaster.intersectObjects(clickobj,true);
+        var intersects = raycaster.intersectObjects(clickobj, true);
         if (intersects.length > 0) {
 
             if (INTERSECTED != intersects[0].object) {
@@ -121,7 +121,7 @@ function start() {
         event.preventDefault();
         raycaster.setFromCamera(mouse, camera);
 
-        var intersects = raycaster.intersectObjects(clickobj,true);
+        var intersects = raycaster.intersectObjects(clickobj, true);
 
         if (intersects.length > 0) {
             //TODO：implement functions while double clicking on objects
