@@ -118,6 +118,7 @@
         controls.maxPolarAngle = Math.PI * 0.5;
         controls.minDistance = 10;
         controls.maxDistance = 7500;
+        raycaster = new THREE.Raycaster();
     }
     function onWindowResize() {
         windowHalfX = window.innerWidth / 2;

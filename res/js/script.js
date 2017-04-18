@@ -12,6 +12,8 @@ function start() {
     var mouse = new THREE.Vector2(), INTERSECTED;
     var raycaster = new THREE.Raycaster();
 
+    var targetObject = new THREE.Object3D();
+    scene.add(targetObject);
     //renderer
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -19,10 +21,11 @@ function start() {
     document.body.appendChild(renderer.domElement);
 
     //camera
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
-    camera.position.x = 0;
-    camera.position.y = 0;
-    camera.position.z = 15;
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+    camera.target = targetObject;
+    camera.position.x = 60;
+    camera.position.y = 20;
+    camera.position.z = 20;
 
     //controller
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -33,7 +36,8 @@ function start() {
     //light
     var ambient = new THREE.AmbientLight(0x666666, 0.5);
     var light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(1, 0, 1);
+    light.target = targetObject;
+    light.position.set(10, 10, 1);
     scene.add(ambient);
     scene.add(light);
 
@@ -56,12 +60,12 @@ function start() {
 
         var gate1 = new TollGate(container);
         gate1.setPickAble(true);
-        gate1.setPos(10, 0, 0);
+        gate1.setPos(0, 0, 0);
         gate1.createMesh();
         gate1.name = 'Toll Gate 1';
         var gate2 = new TollGate(container);
-        gate2.createMesh();
         gate2.setPos(-10, 0, 0);
+       // gate2.createMesh();
         gate2.name = 'Toll Gate 2'
 
 
