@@ -8,6 +8,7 @@ ObjComponent = function (container) {
 
     var obj = this;
     var position = new THREE.Vector3(0, 0, 0);
+    var orientation = new THREE.Vector3(0, 0, 0);
     var scene = container[0];
     var imageloader = container[1];
     var objloader = container[2];
@@ -16,7 +17,12 @@ ObjComponent = function (container) {
     var imageurl;
     var objurl;
     var interactive = false;
+    var wireframe = false;
     this.name = 'Toll Gate';
+    var wireframemat = new THREE.MeshBasicMaterial({wireframe: true});
+    var normalmat = new THREE.MeshPhongMaterial({color: 0x13d2dd})
+    //var normalmat = new THREE.MeshPhongMaterial()
+    //obj.castShadow = true;
 
 
     this.createMesh = function () {
@@ -26,14 +32,30 @@ ObjComponent = function (container) {
         });
         objloader.load(objurl, function (o) {
             for (var i = 0, l = o.children.length; i < l; i++) {
-                o.children[0].material.map = texture;
+                if (wireframe) {
+                    o.children[0].material = wireframemat;
+                }
+                else {
+                    if (imageurl) {
+                        o.children[0].material.map = texture;
+                    }
+                    else {
+                        o.children[0].material = normalmat;
+                    }
+
+                }
+                o.children[0].castShadow = true;
+                o.children[0].receiveShadow = true;
                 obj.add(o.children[0]);
             }
             obj.position.x = position.x;
             obj.position.y = position.y;
             obj.position.z = position.z;
+            obj.rotateX(orientation.x);
+            obj.rotateY(orientation.y);
+            obj.rotateZ(orientation.z);
 
-            if(interactive){
+            if (interactive) {
                 clickobj.push(obj);
             }
             scene.add(obj);
@@ -45,14 +67,25 @@ ObjComponent = function (container) {
         position.y = b;
         position.z = c;
     };
+    this.setOri = function (a, b, c) {
+        orientation.x = a;
+        orientation.y = b;
+        orientation.z = c;
+    };
     this.setPickAble = function (boolean) {
         interactive = boolean;
     };
-    this.setImageUrl = function(url) {
+    this.setImageUrl = function (url) {
         imageurl = url;
     };
-    this.setObjUrl = function(url) {
+    this.setObjUrl = function (url) {
         objurl = url;
+    }
+    this.setWireframe = function (boolean) {
+        wireframe = boolean;
+    }
+    this.setName = function (string) {
+        this.name = string;
     }
 };
 
@@ -65,9 +98,9 @@ ObjComponent.prototype = Object.create(THREE.Object3D.prototype);
  * @param {Array} clickobj
  * @constructor
  */
-SceneContainer = function(scene,imageloader,objloader,clickobj){
+SceneContainer = function (scene, imageloader, objloader, clickobj) {
     var container = [];
-    container.push(scene,imageloader,objloader,clickobj);
+    container.push(scene, imageloader, objloader, clickobj);
     return container;
 };
 

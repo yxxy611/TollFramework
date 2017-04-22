@@ -8,17 +8,21 @@ function start() {
     var container;
     var clickobj = [];
     var scene = new THREE.Scene();
-    var renderer = new THREE.WebGLRenderer();
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
     var mouse = new THREE.Vector2(), INTERSECTED;
     var raycaster = new THREE.Raycaster();
 
     var targetObject = new THREE.Object3D();
     scene.add(targetObject);
+    scene.fog = new THREE.FogExp2( 0x000000, 0.01 );
     //renderer
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xaaaaaa);
+    renderer.setClearColor(0x000000);
+    //renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     document.body.appendChild(renderer.domElement);
+
 
     //camera
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
@@ -35,11 +39,18 @@ function start() {
 
     //light
     var ambient = new THREE.AmbientLight(0x666666, 0.5);
-    var light = new THREE.DirectionalLight(0xffffff, 1);
+    var light = new THREE.PointLight(0xffffff, 1);
+    light.castShadow = true;
     light.target = targetObject;
-    light.position.set(10, 10, 1);
+    light.position.set(50, 50, 50);
     scene.add(ambient);
     scene.add(light);
+    //Set up shadow properties for the light
+    light.shadow.mapSize.width = 512;  // default
+    light.shadow.mapSize.height = 512; // default
+    light.shadow.camera.near = 0.5;       // default
+    light.shadow.camera.far = 500;      // default
+
 
     //load manager
     var manager = new THREE.LoadingManager();
@@ -59,14 +70,16 @@ function start() {
     function initLayout() {
 
         var gate1 = new TollGate(container);
-        gate1.setPickAble(true);
-        gate1.setPos(0, 0, 0);
-        gate1.createMesh();
-        gate1.name = 'Toll Gate 1';
-        var gate2 = new TollGate(container);
-        gate2.setPos(-10, 0, 0);
-       // gate2.createMesh();
-        gate2.name = 'Toll Gate 2'
+        gate1.init();
+       //  gate1.setPickAble(false);
+       //  gate1.setWireframe(false);
+       //  gate1.setPos(0, 0, 0);
+       //  gate1.createMesh();
+       //  gate1.name = 'Toll Gate 1';
+       //  var gate2 = new TollGate(container);
+       //  gate2.setPos(-10, 0, 0);
+       // // gate2.createMesh();
+       //  gate2.name = 'Toll Gate 2'
 
 
     }
@@ -101,8 +114,8 @@ function start() {
             INTERSECTED = null;
 
         }
-
         renderer.render(scene, camera);
+
 
     }
     function onWindowResize() {
@@ -134,8 +147,8 @@ function start() {
         }
     }
 
-
     initLayout();
     animate();
 }
 window.onload = start;
+
