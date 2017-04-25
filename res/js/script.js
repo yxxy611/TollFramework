@@ -38,7 +38,7 @@ function start() {
     controls.maxDistance = 7500;
 
     //light
-    var ambient = new THREE.AmbientLight(0x666666, 0.5);
+    var ambient = new THREE.AmbientLight(0x666666, 1);
     var light = new THREE.PointLight(0xffffff, 1);
     light.castShadow = true;
     light.target = targetObject;
@@ -58,9 +58,10 @@ function start() {
         console.log(item, loaded, total);
     };
     var imageloader = new THREE.ImageLoader(manager);
+    var textureloader = new THREE.TextureLoader(manager);
     var objloader = new THREE.OBJLoader(manager);
 
-    container = new SceneContainer(scene, imageloader, objloader, clickobj);
+    container = new SceneContainer(scene, imageloader,textureloader,objloader, clickobj);
 
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     document.addEventListener('dblclick', onDocumentClick, false);
@@ -69,14 +70,21 @@ function start() {
 
     function initLayout() {
 
-        var gate1 = new TollGate(container);
-        gate1.init();
+        var layout = new SceneConstructor(container);
+        layout.init();
+
+
+        // var mapB = textureloader.load( "res/textures/RGB.png" );
+        // var materialB = new THREE.SpriteMaterial( { map: mapB, color: 0xffffff, fog: true } );
+        // var sprite = new THREE.Sprite( materialB );
+        // scene.add(sprite);
+        // clickobj.push(sprite);
        //  gate1.setPickAble(false);
        //  gate1.setWireframe(false);
        //  gate1.setPos(0, 0, 0);
        //  gate1.createMesh();
        //  gate1.name = 'Toll Gate 1';
-       //  var gate2 = new TollGate(container);
+       //  var gate2 = new SceneConstructor(container);
        //  gate2.setPos(-10, 0, 0);
        // // gate2.createMesh();
        //  gate2.name = 'Toll Gate 2'
@@ -98,18 +106,18 @@ function start() {
 
             if (INTERSECTED !== intersects[0].object) {
 
-                if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);//
+                if (INTERSECTED) INTERSECTED.material.color.setHex(INTERSECTED.currentHex);//
 
                 INTERSECTED = intersects[0].object;
-                INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();//始终保持current为初始值
-                INTERSECTED.material.emissive.setHex(0xff0000);
+                INTERSECTED.currentHex = INTERSECTED.material.color.getHex();//始终保持current为初始值
+                INTERSECTED.material.color.setHex(0xff0000);
 
             }
 
         }
         else {
 
-            if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+            if (INTERSECTED) INTERSECTED.material.color.setHex(INTERSECTED.currentHex);
 
             INTERSECTED = null;
 
@@ -142,7 +150,7 @@ function start() {
 
         if (intersects.length > 0) {
             //TODO：implement functions while double clicking on objects
-            alert(INTERSECTED.parent.name);
+            alert(INTERSECTED.parent.idnum);
             // window.open("http://localhost:63342/TollFramework/index.html");
         }
     }

@@ -2,7 +2,7 @@
  * @param {Array} container
  * @constructor
  */
-ObjComponent = function (container) {
+LoadedComp = function (container) {
 
     THREE.Object3D.call(this);
 
@@ -11,20 +11,29 @@ ObjComponent = function (container) {
     var orientation = new THREE.Vector3(0, 0, 0);
     var scene = container[0];
     var imageloader = container[1];
-    var objloader = container[2];
-    var clickobj = container[3];
+    var textureloader = container[2]
+    var objloader = container[3];
+    var clickobj = container[4];
     var texture = new THREE.Texture();
-    var imageurl;
-    var objurl;
+    var imageurl, objurl, textureurl;
     var interactive = false;
     var wireframe = false;
-    this.name = 'Toll Gate';
-    var wireframemat = new THREE.MeshBasicMaterial({wireframe: true});
-    var normalmat = new THREE.MeshPhongMaterial({color: 0x13d2dd})
-    //var normalmat = new THREE.MeshPhongMaterial()
-    //obj.castShadow = true;
+    var hexcolor =0x909090
+    var mapsprite, materialsprite;
+    this.idnum = 'unknown';
+    var wireframemat, normalmat;
 
-
+    this.createSprite = function () {
+        mapsprite = textureloader.load(textureurl);
+        materialsprite = new THREE.SpriteMaterial({map: mapsprite, color: 0xffffff, fog: false});
+        var sprite = new THREE.Sprite(materialsprite);
+        obj.position.x = position.x;
+        obj.position.y = position.y;
+        obj.position.z = position.z;
+        obj.add(sprite);
+        scene.add(obj);
+        clickobj.push(sprite);
+    };
     this.createMesh = function () {
         imageloader.load(imageurl, function (image) {
             texture.image = image;
@@ -33,6 +42,7 @@ ObjComponent = function (container) {
         objloader.load(objurl, function (o) {
             for (var i = 0, l = o.children.length; i < l; i++) {
                 if (wireframe) {
+                    wireframemat = new THREE.MeshBasicMaterial({wireframe: true, color: hexcolor});
                     o.children[0].material = wireframemat;
                 }
                 else {
@@ -40,6 +50,7 @@ ObjComponent = function (container) {
                         o.children[0].material.map = texture;
                     }
                     else {
+                        normalmat = new THREE.MeshPhongMaterial({color: hexcolor});
                         o.children[0].material = normalmat;
                     }
 
@@ -61,11 +72,11 @@ ObjComponent = function (container) {
             scene.add(obj);
         }, onProgress, onError);
     };
-    this.setPos = function (a, b, c) {
-        console.log(this.name + ':' + 'set pos' + '(' + a + ',' + b + ',' + c + ')');
-        position.x = a;
-        position.y = b;
-        position.z = c;
+    this.setPos = function (array) {
+        console.log(this.name + ':' + 'set pos' + '(' + array[0] + ',' + array[1] + ',' + array[2] + ')');
+        position.x = array[0];
+        position.y = array[1];
+        position.z = array[2];
     };
     this.setOri = function (a, b, c) {
         orientation.x = a;
@@ -78,29 +89,36 @@ ObjComponent = function (container) {
     this.setImageUrl = function (url) {
         imageurl = url;
     };
+    this.setTextureUrl = function (url) {
+        textureurl = url;
+    };
     this.setObjUrl = function (url) {
         objurl = url;
-    }
+    };
     this.setWireframe = function (boolean) {
         wireframe = boolean;
-    }
+    };
     this.setName = function (string) {
-        this.name = string;
+        this.idnum = string;
+    };
+    this.setMatColor = function (hex) {
+        hexcolor = hex;
     }
 };
 
-ObjComponent.prototype = Object.create(THREE.Object3D.prototype);
+LoadedComp.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
  * @param {THREE.Scene} scene
  * @param {THREE.ImageLoader} imageloader
  * @param {THREE.OBJLoader} objloader
+ * @patam {THREE.TextureLoader} textureloader
  * @param {Array} clickobj
  * @constructor
  */
-SceneContainer = function (scene, imageloader, objloader, clickobj) {
+SceneContainer = function (scene, imageloader, textureloader, objloader, clickobj) {
     var container = [];
-    container.push(scene, imageloader, objloader, clickobj);
+    container.push(scene, imageloader, textureloader, objloader, clickobj);
     return container;
 };
 
