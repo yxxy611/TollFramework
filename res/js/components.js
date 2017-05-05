@@ -18,18 +18,20 @@ LoadedComp = function (container) {
     var imageurl, objurl, textureurl;
     var interactive = false;
     var wireframe = false;
-    var hexcolor =0x909090
+    var hexcolor =0xffffff;
     var mapsprite, materialsprite;
+    var mat = new THREE.MeshStandardMaterial({opacity: 1,
+        transparent: true,side: THREE.FrontSide,metalness:0,roughness:1 });
+    var wireframemat,normalmat;
+    var iconscale = 1;
     this.idnum = 'unknown';
-    var wireframemat, normalmat;
 
     this.createSprite = function () {
         mapsprite = textureloader.load(textureurl);
         materialsprite = new THREE.SpriteMaterial({map: mapsprite, color: 0xffffff, fog: false});
         var sprite = new THREE.Sprite(materialsprite);
-        obj.position.x = position.x;
-        obj.position.y = position.y;
-        obj.position.z = position.z;
+        sprite.scale.set(iconscale,iconscale,iconscale);
+        obj.position.set(position.x,position.y,position.z) ;
         obj.add(sprite);
         scene.add(obj);
         clickobj.push(sprite);
@@ -42,26 +44,27 @@ LoadedComp = function (container) {
         objloader.load(objurl, function (o) {
             for (var i = 0, l = o.children.length; i < l; i++) {
                 if (wireframe) {
-                    wireframemat = new THREE.MeshBasicMaterial({wireframe: true, color: hexcolor});
+                    wireframemat = new THREE.MeshBasicMaterial({wireframe: true,color:hexcolor});
                     o.children[0].material = wireframemat;
                 }
                 else {
                     if (imageurl) {
-                        o.children[0].material.map = texture;
+                        // mat = new THREE.MeshStandardMaterial({opacity: 1,
+                        //     transparent: true,map:texture,side: THREE.FrontSide,metalness:0,roughness:1 });
+                        mat.map = texture;
+                        o.children[0].material = mat;
                     }
                     else {
-                        normalmat = new THREE.MeshPhongMaterial({color: hexcolor});
+                        normalmat = new THREE.MeshPhongMaterial({side: THREE.FrontSide,color:hexcolor });
                         o.children[0].material = normalmat;
                     }
 
                 }
                 o.children[0].castShadow = true;
-                o.children[0].receiveShadow = true;
+                //o.children[0].receiveShadow = true;
                 obj.add(o.children[0]);
             }
-            obj.position.x = position.x;
-            obj.position.y = position.y;
-            obj.position.z = position.z;
+            obj.position.set(position.x,position.y,position.z) ;
             obj.rotateX(orientation.x);
             obj.rotateY(orientation.y);
             obj.rotateZ(orientation.z);
@@ -72,8 +75,12 @@ LoadedComp = function (container) {
             scene.add(obj);
         }, onProgress, onError);
     };
+    this.setIconSize = function(a)
+    {
+        iconscale = a;
+    };
     this.setPos = function (array) {
-        console.log(this.name + ':' + 'set pos' + '(' + array[0] + ',' + array[1] + ',' + array[2] + ')');
+        //console.log(this.name + ':' + 'set pos' + '(' + array[0] + ',' + array[1] + ',' + array[2] + ')');
         position.x = array[0];
         position.y = array[1];
         position.z = array[2];
@@ -101,6 +108,10 @@ LoadedComp = function (container) {
     this.setName = function (string) {
         this.idnum = string;
     };
+    this.setMat = function(m){
+        mat = m;
+
+    };
     this.setMatColor = function (hex) {
         hexcolor = hex;
     }
@@ -123,10 +134,10 @@ SceneContainer = function (scene, imageloader, textureloader, objloader, clickob
 };
 
 onProgress = function (xhr) {
-    if (xhr.lengthComputable) {
-        var percentComplete = xhr.loaded / xhr.total * 100;
-        console.log(Math.round(percentComplete, 2) + '% downloaded');
-    }
+    // if (xhr.lengthComputable) {
+    //     var percentComplete = xhr.loaded / xhr.total * 100;
+    //     console.log(Math.round(percentComplete, 2) + '% downloaded');
+    // }
 };
 onError = function (xhr) {
 };
