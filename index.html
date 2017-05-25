@@ -41,12 +41,12 @@
 <!-- External libraries -->
 <script src="res/js/lib/three.min.js"></script>
 <script src="res/js/lib/jquery-3.2.1.min.js"></script>
-
-
 <script src="res/js/lib/controls/OrbitControls.js"></script>
 <script src="res/js/lib/loaders/OBJLoader.js"></script>
-
-
+<!-- Internal libraries -->
+<script src="res/js/scenecomposer.js"></script>
+<!-- Execution scripts -->
+<script src="res/js/script.js"></script>
 <!-- skybox shaders -->
 <script type="x-shader/x-vertex" id="sky-vertex">
 varying vec3 vWorldPosition;
@@ -67,14 +67,5 @@ void main() {
 float h = normalize( vWorldPosition + offset ).y;
 gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( h, exponent ), 0.0 ) ), 1.0 );
 }
-
 </script>
-<!-- /skybox shaders -->
-
-<!-- Internal libraries -->
-<script src="res/js/components.js"></script>
-<!-- Execution scripts -->
-<script src="res/js/script.js"></script>
-
-
 </html>
