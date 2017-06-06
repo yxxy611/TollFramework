@@ -1,9 +1,8 @@
 /**
  * Created by yxxy6 on 5/25/2017.
  */
-SceneComposer = function (c) {
-    $.getJSON("res/json/Zhuozhou_south.json", function (data) {
-
+SceneComposer = function (c,ju) {
+    $.getJSON(ju, function (data) {
         var tempObj, foo;
         for (var i = 0; i < data.meshes.length; i++) {
             foo = data.meshes[i];
@@ -28,15 +27,10 @@ SceneComposer = function (c) {
         }
     });
 };
-function onDocumentClick(event) {
-    event.preventDefault();
-    raycaster.setFromCamera(mouse, camera);
 
-    var intersects = raycaster.intersectObjects(clickobj, true);
-
-    if (intersects.length > 0) {
-        //TODO：implement functions while double clicking on objects 双击图标实现功能
-        alert(INTERSECTED.parent.idnum);
-        // window.open("http://localhost:63342/TollFramework/index.html");
-    }
+function doubleClick(INTERSECTED) {
+    //TODO：implement functions while double clicking on objects 双击图标实现功能
+    //INTERSECTED is the object
+    alert(INTERSECTED.parent.idnum);
+    //window.open("http://localhost:63342/TollFramework/index.html");
 }

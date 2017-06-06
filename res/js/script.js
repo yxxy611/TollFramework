@@ -4,8 +4,7 @@
 // Initialize scene
 //configure scenario & rendering parameters
 
-
-function start() {
+function start(ju) {
 
     var container;
     var clickobj = [];
@@ -14,15 +13,25 @@ function start() {
     var mouse = new THREE.Vector2(), INTERSECTED;
     var raycaster = new THREE.Raycaster();
     var targetObject = new THREE.Object3D();
+    var groundcolor = 0x291f08; //背景地面颜色 16进制
 
-    var treepos = [new THREE.Vector3(-30, 0, 30), new THREE.Vector3(-10, 0, 30), new THREE.Vector3(0, 0, 30), new THREE.Vector3(10, 0, 30), new THREE.Vector3(40, 0, 30), new THREE.Vector3(-20, 0, -30), new THREE.Vector3(10, 0, -30), new THREE.Vector3(30, 0, -30), new THREE.Vector3(40, 0, -30), new THREE.Vector3(50, 0, -30)];
+    var treepos = [new THREE.Vector3(-30, -1, 30),
+        new THREE.Vector3(-10, -1, 30),
+        new THREE.Vector3(0, -1, 30),
+        new THREE.Vector3(10, -1, 30),
+        new THREE.Vector3(40, -1, 30),
+        new THREE.Vector3(-20, -1, -30),
+        new THREE.Vector3(10, -1, -30),
+        new THREE.Vector3(30, -1, -30),
+        new THREE.Vector3(40, -1, -30),
+        new THREE.Vector3(50, -1, -30)];//树木位置
     var tree = [];
     var rotaxis = new THREE.Vector3();
     var b, v, yhat, rotangle;
 
 
     scene.add(targetObject);
-    scene.fog = new THREE.FogExp2(0xffffff, 0.005);
+    scene.fog = new THREE.FogExp2(0xffffff, 0.005);//雾颜色及浓度
     //renderer
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -46,8 +55,8 @@ function start() {
     controls.maxDistance = 100;
 
     //light
-    var ambient = new THREE.AmbientLight(0xffffff, 0.8);
-    var light = new THREE.PointLight(0xffffff, 1);
+    var ambient = new THREE.AmbientLight(0xffffff, 0.8);//环境光颜色及强度
+    var light = new THREE.PointLight(0xffffff, 1);//点光源强度及颜色
     light.castShadow = true;
     light.target = targetObject;
     light.position.set(50, 50, 50);
@@ -66,7 +75,7 @@ function start() {
     light.shadow.camera.bottom = -d;
 
     //sky
-    // prepare ShaderMaterial without textures
+    // prepare ShaderMaterial without textures 天空盒材质参数
     var vertexShader = document.getElementById('sky-vertex').textContent,
         fragmentShader = document.getElementById('sky-fragment').textContent;
     var uniforms = {
@@ -89,7 +98,7 @@ function start() {
     //ground
     var geometry = new THREE.PlaneBufferGeometry(16000, 16000);
     var material = new THREE.MeshBasicMaterial({
-        color: 0xffffff, opacity: 1,
+        color: groundcolor, opacity: 1,
         transparent: true, side: THREE.FrontSide, metalness: 0, roughness: 1
     });
     var ground = new THREE.Mesh(geometry, material);
@@ -138,12 +147,6 @@ function start() {
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     document.addEventListener('dblclick', onDocumentClick, false);
     window.addEventListener('resize', onWindowResize, false);
-
-
-    function initLayout() {
-
-        SceneComposer(container);
-    }
 
     function animate() {
         requestAnimationFrame(animate);
@@ -220,14 +223,22 @@ function start() {
         mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
     }
 
+    function onDocumentClick(event) {
+        event.preventDefault();
+        raycaster.setFromCamera(mouse, camera);
 
-    // Init postprocessing
-    // initPostprocessing();
+        var intersects = raycaster.intersectObjects(clickobj, true);
 
-    initLayout();
+        if (intersects.length > 0) {
+            doubleClick(INTERSECTED);
+        }
+    }
+
+    SceneComposer(container, ju);
     animate();
 }
 /**
+ * function for loading meshes and icons
  * @param {Array} container
  * @constructor
  */
@@ -363,6 +374,7 @@ SceneContainer = function (scene, imageloader, textureloader, objloader, clickob
     container.push(scene, imageloader, textureloader, objloader, clickobj);
     return container;
 };
+
 onProgress = function (xhr) {
     // if (xhr.lengthComputable) {
     //     var percentComplete = xhr.loaded / xhr.total * 100;
@@ -371,4 +383,5 @@ onProgress = function (xhr) {
 };
 onError = function (xhr) {
 };
-window.onload = start;
+
+//window.onload = start;

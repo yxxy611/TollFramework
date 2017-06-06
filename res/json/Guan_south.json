@@ -3,8 +3,8 @@
     {
       "name": "Roof",
       "type": "mesh",
-      "url": "res/models/Toll_zhuozhou_south.obj",
-      "imageUrl":"res/textures/RGB.png",
+      "url": "res/models/Toll_dongwan.obj",
+      "imageUrl":"res/textures/dongwan_diff.png",
       "position":[0,0,0],
       "orientation":[0,0,0]
     },
@@ -19,8 +19,8 @@
     {
       "name": "TollName",
       "type": "mesh",
-      "url": "res/models/Toll_zhuozhou_south_name.obj",
-      "imageUrl":"res/textures/RGB.png",
+      "url": "res/models/Toll_guan_south_name.obj",
+      "imageUrl":"res/textures/dongwan_diff.png",
       "position":[0,0,0],
       "orientation":[0,0,0]
     },
@@ -53,7 +53,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[2,5.8,2.5],
+      "position":[2,6.2,2.5],
       "orientation":[0,0,0]
     },
     {
@@ -61,7 +61,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[2,5.8,-2.5],
+      "position":[2,6.2,-2.5],
       "orientation":[0,0,0]
     },
     {
@@ -69,7 +69,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[2,6.3,-8],
+      "position":[2,6.2,-8],
       "orientation":[0,0,0]
     },
     {
@@ -85,7 +85,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[2,7,-20],
+      "position":[2,6.2,-20],
       "orientation":[0,0,0]
     },
     {
@@ -93,7 +93,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[-3,6.3,8],
+      "position":[-3,6.23,8],
       "orientation":[0,3.14,0]
     },
     {
@@ -109,7 +109,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[-3,7,20],
+      "position":[-3,6.2,20],
       "orientation":[0,3.14,0]
     },
     {
@@ -117,7 +117,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[-3,5.8,2.5],
+      "position":[-3,6.2,2.5],
       "orientation":[0,3.14,0]
     },
     {
@@ -125,7 +125,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[-3,5.8,-2.5],
+      "position":[-3,6.2,-2.5],
       "orientation":[0,3.14,0]
     },
     {
@@ -133,7 +133,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[-3,6.3,-8],
+      "position":[-3,6.2,-8],
       "orientation":[0,3.14,0]
     },
     {
@@ -149,7 +149,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[-3,7,-20],
+      "position":[-3,6.2,-20],
       "orientation":[0,3.14,0]
     },
     {
@@ -157,7 +157,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[2,6.3,8],
+      "position":[2,6.2,8],
       "orientation":[0,0,0]
     },
     {
@@ -173,7 +173,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[2,7,20],
+      "position":[2,6.2,20],
       "orientation":[0,0,0]
     }
   ],
@@ -294,7 +294,7 @@
       "name": "CameraType02Num07",
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon02.png",
-      "size":1.5,
+      "size":2,
       "position":[6, 1.5, 18.795],
       "interactive":true
     },

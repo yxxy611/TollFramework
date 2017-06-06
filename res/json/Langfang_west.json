@@ -3,15 +3,15 @@
     {
       "name": "Roof",
       "type": "mesh",
-      "url": "res/models/Toll_zhuozhou_south.obj",
-      "imageUrl":"res/textures/RGB.png",
+      "url": "res/models/Toll_langfang_west.obj",
+      "imageUrl":"res/textures/langfang_west_diff.png",
       "position":[0,0,0],
       "orientation":[0,0,0]
     },
     {
       "name": "Base",
       "type": "mesh",
-      "url": "res/models/Toll_5in3out.obj",
+      "url": "res/models/Toll_6out.obj",
       "imageUrl":"res/textures/RGB.png",
       "position":[0,0,0],
       "orientation":[0,0,0]
@@ -19,23 +19,23 @@
     {
       "name": "TollName",
       "type": "mesh",
-      "url": "res/models/Toll_zhuozhou_south_name.obj",
-      "imageUrl":"res/textures/RGB.png",
+      "url": "res/models/Toll_langfang_west_name.obj",
+      "imageUrl":"res/textures/langfang_west_diff.png",
       "position":[0,0,0],
       "orientation":[0,0,0]
     },
     {
       "name": "MainRoad",
       "type": "mesh",
-      "url": "res/models/Toll_5in3out_road.obj",
-      "imageUrl":"res/textures/Toll_5in3out_road.png",
+      "url": "res/models/Toll_6out_road.obj",
+      "imageUrl":"res/textures/Toll_6out_road.png",
       "position":[0,0,0],
       "orientation":[0,0,0]
     },
     {
       "name": "RoadExtension01",
       "type": "mesh",
-      "url": "res/models/Toll_5in3out_road.obj",
+      "url": "res/models/Toll_6out_road.obj",
       "imageUrl":"res/textures/Toll_5in3out_road_extension.png",
       "position":[100,0,0],
       "orientation":[0,0,0]
@@ -43,7 +43,7 @@
     {
       "name": "RoadExtension02",
       "type": "mesh",
-      "url": "res/models/Toll_5in3out_road.obj",
+      "url": "res/models/Toll_6out_road.obj",
       "imageUrl":"res/textures/Toll_5in3out_road_extension.png",
       "position":[-100,0,0],
       "orientation":[0,0,0]
@@ -53,7 +53,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[2,5.8,2.5],
+      "position":[6,6.2,2.5],
       "orientation":[0,0,0]
     },
     {
@@ -61,7 +61,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[2,5.8,-2.5],
+      "position":[6,6.2,-2.5],
       "orientation":[0,0,0]
     },
     {
@@ -69,7 +69,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[2,6.3,-8],
+      "position":[6,6.2,-8],
       "orientation":[0,0,0]
     },
     {
@@ -77,7 +77,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[2,6.2,-13.5],
+      "position":[6,6.2,-13.5],
       "orientation":[0,0,0]
     },
     {
@@ -85,7 +85,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[2,7,-20],
+      "position":[6,6.23,8],
       "orientation":[0,0,0]
     },
     {
@@ -93,31 +93,15 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[-3,6.3,8],
-      "orientation":[0,3.14,0]
-    },
-    {
-      "name": "LanInstructorArrow07",
-      "type": "mesh",
-      "url": "res/models/Lane_instructor.obj",
-      "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[-3,6.2,13.5],
-      "orientation":[0,3.14,0]
-    },
-    {
-      "name": "LanInstructorArrow08",
-      "type": "mesh",
-      "url": "res/models/Lane_instructor.obj",
-      "imageUrl":"res/textures/Toll_arrow.png",
-      "position":[-3,7,20],
-      "orientation":[0,3.14,0]
+      "position":[6,6.2,13.5],
+      "orientation":[0,0,0]
     },
     {
       "name": "LanInstructorCross01",
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[-3,5.8,2.5],
+      "position":[-7,6.2,2.5],
       "orientation":[0,3.14,0]
     },
     {
@@ -125,7 +109,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[-3,5.8,-2.5],
+      "position":[-7,6.2,-2.5],
       "orientation":[0,3.14,0]
     },
     {
@@ -133,7 +117,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[-3,6.3,-8],
+      "position":[-7,6.2,-8],
       "orientation":[0,3.14,0]
     },
     {
@@ -141,7 +125,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[-3,6.2,-13.5],
+      "position":[-7,6.2,-13.5],
       "orientation":[0,3.14,0]
     },
     {
@@ -149,7 +133,7 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[-3,7,-20],
+      "position":[-7,6.2,8],
       "orientation":[0,3.14,0]
     },
     {
@@ -157,24 +141,8 @@
       "type": "mesh",
       "url": "res/models/Lane_instructor.obj",
       "imageUrl":"res/textures/Toll_cross.png",
-      "position":[2,6.3,8],
-      "orientation":[0,0,0]
-    },
-    {
-      "name": "LanInstructorCross07",
-      "type": "mesh",
-      "url": "res/models/Lane_instructor.obj",
-      "imageUrl":"res/textures/Toll_cross.png",
-      "position":[2,6.2,13.5],
-      "orientation":[0,0,0]
-    },
-    {
-      "name": "LanInstructorCross08",
-      "type": "mesh",
-      "url": "res/models/Lane_instructor.obj",
-      "imageUrl":"res/textures/Toll_cross.png",
-      "position":[2,7,20],
-      "orientation":[0,0,0]
+      "position":[-7,6.2,13.5],
+      "orientation":[0,3.14,0]
     }
   ],
   "icons":[
@@ -183,7 +151,7 @@
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon.png",
       "size":1.5,
-      "position":[0, 3.5, -16.11],
+      "position":[0, 3.5, -10.74],
       "interactive":true
     },
     {
@@ -191,7 +159,7 @@
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon.png",
       "size":1.5,
-      "position":[0, 3.5, -10.74],
+      "position":[0, 3.5, -5.37],
       "interactive":true
     },
     {
@@ -199,7 +167,7 @@
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon.png",
       "size":1.5,
-      "position":[0, 3.5, -5.37],
+      "position":[0, 3.5, 0],
       "interactive":true
     },
     {
@@ -207,7 +175,7 @@
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon.png",
       "size":1.5,
-      "position":[0, 3.5, 0],
+      "position":[0, 3.5, 5.37],
       "interactive":true
     },
     {
@@ -215,7 +183,7 @@
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon.png",
       "size":1.5,
-      "position":[0, 3.5, 5.37],
+      "position":[0, 3.5, 10.74],
       "interactive":true
     },
     {
@@ -223,23 +191,7 @@
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon.png",
       "size":1.5,
-      "position":[0, 3.5, 10.74],
-      "interactive":true
-    },
-    {
-      "name": "CameraType01Num07",
-      "type": "icon",
-      "imageUrl":"res/textures/security-camera-icon.png",
-      "size":1.5,
       "position":[0, 3.5,16.11],
-      "interactive":true
-    },
-    {
-      "name": "CameraType02Num01",
-      "type": "icon",
-      "imageUrl":"res/textures/security-camera-icon02.png",
-      "size":2,
-      "position":[-6, 1.5, -18.795],
       "interactive":true
     },
     {
@@ -279,7 +231,7 @@
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon02.png",
       "size":2,
-      "position":[6, 1.5, 8.055],
+      "position":[-6, 1.5, 8.055],
       "interactive":true
     },
     {
@@ -287,15 +239,7 @@
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon02.png",
       "size":2,
-      "position":[6, 1.5, 13.425],
-      "interactive":true
-    },
-    {
-      "name": "CameraType02Num07",
-      "type": "icon",
-      "imageUrl":"res/textures/security-camera-icon02.png",
-      "size":1.5,
-      "position":[6, 1.5, 18.795],
+      "position":[-6, 1.5, 13.425],
       "interactive":true
     },
     {
@@ -303,7 +247,7 @@
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon.png",
       "size":1,
-      "position":[39.8, 4.5,18.8],
+      "position":[44.6, 4.2,-12.3],
       "interactive":true
     },
     {
@@ -311,7 +255,7 @@
       "type": "icon",
       "imageUrl":"res/textures/security-camera-icon.png",
       "size":1,
-      "position":[-39.8, 4.5, -18.8],
+      "position":[-39.8, 4.2, -12.3],
       "interactive":true
     }
 
